@@ -1,15 +1,24 @@
 t = int(input())
+
 for _ in range(t):
     n = int(input())
     s = input()
-    seen1 = set()
-    seen2 = set()
-    done = True
-    for el in s:
-        if el not in seen1 and done:
-            seen1.add(el)
-        else:
-            done = False
-            seen2.add(el)
 
-    print(len(seen1)+len(seen2))
+    prefix = [0]*n
+    suffix = [0]*n
+
+    seen = set()
+    for i in range(n):
+        seen.add(s[i])
+        prefix[i] = len(seen)
+
+    seen = set()
+    for i in range(n-1,-1,-1):
+        seen.add(s[i])
+        suffix[i] = len(seen)
+
+    ans = 0
+    for i in range(n-1):
+        ans = max(ans, prefix[i]+suffix[i+1])
+    
+    print(ans)
