@@ -1,16 +1,11 @@
 n = int(input())
 arr  = list(map(int,input().split()))
-min_idx = n
-max_idx = -1
-max_el = 1
-min_el = 101
-for i in range(n):
-    if arr[i]> max_el:
-        max_el = arr[i]
-        max_idx = i
-    if arr[i]<=min_el:
-        min_el = arr[i]
-        min_idx = i
+max_idx = arr.index(max(arr))
+min_idx = n - 1 - arr[::-1].index(min(arr))
 
-ans = (max_idx-0) + (n-1-min_idx) - (max_idx > min_idx)
+ans = max_idx + (n-1-min_idx)
+
+if max_idx > min_idx:
+    ans -= 1
+
 print(ans)
